@@ -1,0 +1,394 @@
+﻿<Window x:Class="IZ.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IZ"
+        mc:Ignorable="d"
+        Title="Методы оптимизации" 
+        Height="480" MinHeight="480" 
+        Width="800" MinWidth="800"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ThreeDBorderWindow" Icon="/images.png">
+    <Window.Resources>
+        <Style x:Key="Button_Submit" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="Background" Value="#651FFF"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#6200EA"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="Button_Example" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEEEEE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="Button_Clear" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="Background" Value="#FFEF5350"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F44336"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Verdana" />
+            
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Verdana" />
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <TabControl x:Name="algorithms">
+            <TabItem x:Name="dichotomy" IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="14">Дихотомия</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <GridSplitter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+                        <Grid Grid.Column="0" Grid.Row="0" Margin="20,10,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <GridSplitter Grid.Row="0" Grid.Column="0" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                            <GridSplitter Grid.Row="1" Grid.Column="0" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock Text="Заполните коэффициенты при переменных" Margin="0,0,0,10"></TextBlock>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="1.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="dichotomy_textBox_a" PreviewTextInput="NumberValidationTextBox" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="x² + " Grid.Column="1" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_b" PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="x + " Grid.Column="3" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_c" PreviewTextInput="NumberValidationTextBox" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="--->" Grid.Column="5" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <ComboBox x:Name="dichotomy_comboBox" Grid.Column="6" Grid.Row="0" VerticalAlignment="Top">
+                                        <ComboBoxItem IsSelected="True">
+                                            <TextBlock >min</TextBlock>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock >max</TextBlock>
+                                        </ComboBoxItem>
+                                    </ComboBox>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+                                <TextBlock Text="Отрезок L [a; b]" Margin="0,0,0,10"></TextBlock>
+                                <Grid HorizontalAlignment="Left" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="[" Grid.Column="0" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_l1" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text=";" Grid.Column="2" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_l2" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="0"  TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="]" Grid.Column="4" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
+                                <TextBlock Text="Вспомогательные значения" Margin="0,0,0,10"></TextBlock>
+                                <Grid HorizontalAlignment="Left" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="ε = " Grid.Column="0" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_epsilon" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="l₀ = " Grid.Column="3" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="dichotomy_textBox_l0" PreviewTextInput="NumberValidationTextBox" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="1" Grid.Row="0" Margin="20,10,20,10" Width="180" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="dichotomy_button_submit"  Grid.Column="0" Grid.Row="0" Height="35" Content="Решить" Click="Dichotomy_Button_Submit" Style="{DynamicResource Button_Submit}"/>
+                            <Button x:Name="dichotomy_button_example" Grid.Column="0" Grid.Row="1" Height="35" Content="Пример" Click="Dichotomy_Button_Example" Style="{DynamicResource Button_Example}" />
+                            <Button x:Name="dichotomy_button_clear" Grid.Column="0" Grid.Row="2" Height="35" Content="Очистить" Click="Dichotomy_Button_Clear" Style="{DynamicResource Button_Clear}" />
+                        </Grid>
+
+                        <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="2" x:Name="dichotomy_textBlock_output" TextAlignment="Justify" Margin="50,10,50,10" Padding="10,10,10,10" />
+
+                        <StackPanel Grid.Column="1" Grid.Row="2" Margin="50,10,50,10">
+                            <TextBlock HorizontalAlignment="Center" Padding="10,10,10,10" FontSize="14" FontWeight="Bold">Ответ</TextBlock>
+                            <TextBox IsReadOnly="True" x:Name="dichotomy_textBlock_result" TextAlignment="Center" Padding="10,10,10,10" />
+                        </StackPanel>
+                        
+                       
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="fibonacci">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="14">Фибоначчи</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <GridSplitter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+                        <Grid Grid.Column="0" Grid.Row="0" Margin="20,10,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <GridSplitter Grid.Row="0" Grid.Column="0" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                            <GridSplitter Grid.Row="1" Grid.Column="0" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock Text="Заполните коэффициенты при переменных" Margin="0,0,0,10"></TextBlock>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="1.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="fibonacci_textBox_a" PreviewTextInput="NumberValidationTextBox" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="x² + " Grid.Column="1" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <TextBox x:Name="fibonacci_textBox_b" PreviewTextInput="NumberValidationTextBox" Grid.Column="2" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="x + " Grid.Column="3" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <TextBox x:Name="fibonacci_textBox_c" PreviewTextInput="NumberValidationTextBox" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="--->" Grid.Column="5" Grid.Row="0" TextAlignment="Center" ></TextBlock>
+                                    <ComboBox x:Name="fibonacci_comboBox" Grid.Column="6" Grid.Row="0" VerticalAlignment="Top">
+                                        <ComboBoxItem IsSelected="True">
+                                            <TextBlock>min</TextBlock>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock>max</TextBlock>
+                                        </ComboBoxItem>
+                                    </ComboBox>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+                                <TextBlock Text="Отрезок L [a; b]" Margin="0,0,0,10"></TextBlock>
+                                <Grid HorizontalAlignment="Left" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="[" Grid.Column="0" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="fibonacci_textBox_l1" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text=";" Grid.Column="2" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="fibonacci_textBox_l2" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="0"  TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                    <TextBlock Text="]" Grid.Column="4" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
+                                <TextBlock Text="Вспомогательные значения" Margin="0,0,0,10"></TextBlock>
+                                <Grid HorizontalAlignment="Left" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="l₀ = " Grid.Column="0" Grid.Row="0" TextAlignment="Center"></TextBlock>
+                                    <TextBox x:Name="fibonacci_textBox_l0" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="1" Grid.Row="0" Margin="20,10,20,10" Width="180" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="fibonacci_button_submit"  Grid.Column="0" Grid.Row="0" Height="35" Content="Решить" Click="Fibonacci_Button_Submit" Style="{DynamicResource Button_Submit}"/>
+                            <Button x:Name="fibonacci_button_example" Grid.Column="0" Grid.Row="1" Height="35" Content="Пример" Click="Fibonacci_Button_Example" Style="{DynamicResource Button_Example}" />
+                            <Button x:Name="fibonacci_button_clear" Grid.Column="0" Grid.Row="2" Height="35" Content="Очистить" Click="Fibonacci_Button_Clear" Style="{DynamicResource Button_Clear}" />
+                        </Grid>
+
+                        <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="2" x:Name="fibonacci_textBlock_output" TextAlignment="Justify" Margin="50,10,50,10" Padding="10,10,10,10" />
+
+                        <StackPanel Grid.Column="1" Grid.Row="2" Margin="50,10,50,10">
+                            <TextBlock HorizontalAlignment="Center" Padding="10,10,10,10" FontSize="14" FontWeight="Bold">Ответ</TextBlock>
+                            <TextBox IsReadOnly="True" x:Name="fibonacci_textBlock_result" TextAlignment="Center" Padding="10,10,10,10" />
+                        </StackPanel>
+
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="about" IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="14">Информация</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock FontWeight="Bold" FontSize="16" TextAlignment="Center" Margin="0,0,0,10">
+                                ИНДИВИДУАЛЬНАЯ РАБОТА
+                        </TextBlock>
+                        <TextBlock FontSize="14" TextAlignment="Center" Margin="0,0,0,2">
+                                по курсу «Методы оптимизации»
+                        </TextBlock>
+                        <TextBlock FontSize="14" TextAlignment="Center" Margin="0,0,0,2">
+                                Вариант 20
+                        </TextBlock>
+                        <TextBlock FontSize="14" TextAlignment="Center">
+                                Отхонов Баир КТбо3-8
+                        </TextBlock>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</Window>
