@@ -23,7 +23,7 @@ namespace IZ
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9,-]+");
+            Regex regex = new Regex("[^0-9.-]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
@@ -274,7 +274,7 @@ namespace IZ
             dichotomy_textBox_c.Text = "0";
             dichotomy_textBox_l1.Text = "0";
             dichotomy_textBox_l2.Text = "10";
-            dichotomy_textBox_epsilon.Text = "0,2";
+            dichotomy_textBox_epsilon.Text = "0.2";
             dichotomy_textBox_l0.Text = "1";
             dichotomy_textBlock_output.Text = "";
             dichotomy_textBlock_result.Text = "";
